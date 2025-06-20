@@ -1,0 +1,19 @@
+import React from 'react'; // assure-toi que React est importé si nécessaire
+import { Form } from 'react-bootstrap';
+
+export const SearchBar = () => {
+  return (
+    <>
+      <Form>
+        <Form.Group>
+          <Form.Label> </Form.Label> 
+          <Form.Control type="text" placeholder="enter your city" />
+        </Form.Group>
+
+        <Form.Group>
+          <button variant="primary">search</button>
+        </Form.Group>
+      </Form>
+    </>
+  );
+};
