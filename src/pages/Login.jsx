@@ -68,8 +68,9 @@ function Login() {
           </div>
 
           <button type="submit" className="btn btn-primary w-100">
-            Se connecter
+           Se connecter
           </button>
+
         </form>
       </div>
     </div>
