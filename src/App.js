@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import Stagiaire from "./pages/Stagiaire";
 import Encadreur from "./pages/Encadreur";
+import Stage from "./pages/Stage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/admin" element={<Admin />} />
         <Route path="/stagiaire" element={<Stagiaire />} />
         <Route path="/encadreur" element={<Encadreur />} />
+        <Route path="/encadreur/stage/:id" element={<Stage />} /> 
       </Routes>
     </Router>
   );
