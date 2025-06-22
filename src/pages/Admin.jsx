@@ -55,13 +55,13 @@ function Admin() {
                 className="btn btn-warning btn-sm me-2"
                 onClick={() => modifierStage(stage.id)}
               >
-                ✏️ Modifier (apr nstikiwha khir b icons)
+                 Modifier (apr nstikiwha khir b icons)
               </button>
               <button
                 className="btn btn-danger btn-sm"
                 onClick={() => supprimerStage(stage.id)}
               >
-                🗑️ Supprimer (need some icons bch nstikiha ktr too)
+                Supprimer (need some icons bch nstikiha ktr too)
               </button>
             </div>
           </div>
