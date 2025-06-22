@@ -55,13 +55,13 @@ function Admin() {
                 className="btn btn-warning btn-sm me-2"
                 onClick={() => modifierStage(stage.id)}
               >
-                ✏️ Modifier
+                ✏️ Modifier (apr nstikiwha khir b icons)
               </button>
               <button
                 className="btn btn-danger btn-sm"
                 onClick={() => supprimerStage(stage.id)}
               >
-                🗑️ Supprimer
+                🗑️ Supprimer (need some icons bch nstikiha ktr too)
               </button>
             </div>
           </div>
@@ -85,7 +85,7 @@ function Admin() {
           <h6>Tâches du stage</h6>
           <ul>
             {stage.taches.map((tache, idx) => (
-              <li key={idx}>🗒️ {tache}</li>
+              <li key={idx}>-----------apr ndir 7aja cute hna  {tache}</li>
             ))}
           </ul>
         </div>
