@@ -7,6 +7,9 @@ import Stagiaire from "./pages/Stagiaire";
 import Encadreur from "./pages/Encadreur";
 import Stage from "./pages/Stage";
 import Signup from "./pages/Signup";
+import CreateAdmin from "./pages/CreateAdmin";
+import CreateStagiaire from "./pages/CreateStagiaire";
+import CreateEncadreur from "./pages/CreateEncadreur";
 
 function App() {
   return (
@@ -20,7 +23,11 @@ function App() {
         <Route path="/encadreur" element={<Encadreur />} />
         <Route path="/encadreur/stage/:id" element={<Stage />} /> 
         <Route path="/signup" element={<Signup />} />
-        
+        <Route path="/stage" element={<Stage />} />
+
+        <Route path="/Admin/CreateAdmin" element={<CreateAdmin />} />
+        <Route path="/Admin/CreateStagiaire" element={<CreateStagiaire />} />
+        <Route path="/Admin/CreateEncadreur" element={<CreateEncadreur />} />
       </Routes>
     </Router>
   );
