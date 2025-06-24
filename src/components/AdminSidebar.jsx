@@ -2,13 +2,14 @@ import { Link, useLocation } from "react-router-dom";
 import {
   UserPlus, Users, LayoutDashboard, UserCog, ShieldCheck, LogOut
 } from "lucide-react";
-import logo from "../assets/logo.svg"; // à adapter selon ton chemin
+import logo from "../assets/logo.svg";
 
 const AdminSidebar = () => {
   const location = useLocation();
 
   const navItems = [
-    { to: "/admin", label: "Créer Un Stage ", icon: <LayoutDashboard size={18} /> },
+    { to: "/admin/dashboard", label: "Dashboard Utilisateurs", icon: <LayoutDashboard size={18} /> },
+    { to: "/admin", label: "Créer Un Stage", icon: <LayoutDashboard size={18} /> },
     { to: "/admin/CreateStagiaire", label: "Créer stagiaire", icon: <UserPlus size={18} /> },
     { to: "/admin/CreateEncadreur", label: "Créer encadreur", icon: <UserCog size={18} /> },
     { to: "/admin/CreateAdmin", label: "Créer admin", icon: <ShieldCheck size={18} /> },
@@ -42,7 +43,7 @@ const AdminSidebar = () => {
         </ul>
       </div>
 
-      {/* Déconnexion en bas */}
+      {/* Déconnexion */}
       <div className="mt-10 pt-6 border-t border-orange-300">
         <Link
           to="/home"

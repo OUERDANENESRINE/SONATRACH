@@ -54,11 +54,11 @@ export default function NavBar() {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
             <a
-              href="/login"
+              href="/register"
               className=" font-semibold text-gray-900 hover:text-orange-500 transition-colors duration-200 border-b-0"
               style={{ borderBottom: 'none', textDecoration: 'none' }}
             >
-              Log in <span aria-hidden="true">&rarr;</span>
+              Register <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
         </nav>
@@ -101,15 +101,7 @@ export default function NavBar() {
                     </a>
                   ))}
                 </div>
-                <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:text-orange-500 hover:bg-gray-50 transition-colors duration-200 border-b-0"
-                    style={{ borderBottom: 'none' }}
-                  >
-                    Log in
-                  </a>
-                </div>
+
               </div>
             </div>
           </DialogPanel>

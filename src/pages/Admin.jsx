@@ -90,7 +90,7 @@ function Admin() {
       <AdminSidebar />
       <div className="ml-64 p-8 w-full">
         <h2 className="text-2xl font-bold mb-6 text-orange-700">
-          Tableau de bord Administrateur des stages
+          Tableau de bord  des stages
         </h2>
 
         {/* FORMULAIRE */}

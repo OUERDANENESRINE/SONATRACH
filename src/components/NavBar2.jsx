@@ -58,7 +58,7 @@ export default function NavBar() {
               className=" font-semibold text-gray-900 hover:text-orange-500 transition-colors duration-200 border-b-0"
               style={{ borderBottom: 'none', textDecoration: 'none' }}
             >
-              Log in <span aria-hidden="true">&rarr;</span>
+              Deconnexion <span aria-hidden="true">&rarr;</span>
             </a>
           </div>
         </nav>
@@ -107,7 +107,7 @@ export default function NavBar() {
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:text-orange-500 hover:bg-gray-50 transition-colors duration-200 border-b-0"
                     style={{ borderBottom: 'none' }}
                   >
-                    Log in
+                    Deconnexion
                   </a>
                 </div>
               </div>
