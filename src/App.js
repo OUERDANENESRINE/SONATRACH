@@ -26,23 +26,24 @@ function App() {
   return (
     <Router>
       <ScrollDown />
-      <Routes>
-        <Route path="/" element={<Hero />} />
-        <Route path="/home" element={<Hero />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/stagiaire" element={<Stagiaire />} />
-        <Route path="/encadreur" element={<Encadreur />} />
-        <Route path="/encadreur/stage/:id" element={<Stage />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/stage" element={<Stage />} />
-
-        <Route path="/admin/CreateAdmin" element={<CreateAdmin />} />
-        <Route path="/admin/CreateStagiaire" element={<CreateStagiaire />} />
-        <Route path="/admin/CreateEncadreur" element={<CreateEncadreur />} />
-        <Route path="/admin/dashboard" element={<Dashboard />} /> {/* ✅ URL en minuscule */}
-      </Routes>
+      <div className="flex-grow">
+        <Routes>
+         <Route path="/" element={<Hero />} />
+         <Route path="/home" element={<Hero />} />
+         <Route path="/login" element={<Login />} />
+         <Route path="/register" element={<Register />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/stagiaire" element={<Stagiaire />} />
+          <Route path="/encadreur" element={<Encadreur />} />
+         <Route path="/encadreur/stage/:id" element={<Stage />} />
+         <Route path="/signup" element={<Signup />} />
+         <Route path="/stage" element={<Stage />} />
+         <Route path="/admin/CreateAdmin" element={<CreateAdmin />} />
+         <Route path="/admin/CreateStagiaire" element={<CreateStagiaire />} />
+         <Route path="/admin/CreateEncadreur" element={<CreateEncadreur />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} /> {/* ✅ URL en minuscule */}
+        </Routes>
+       </div>
       <Footer />
     </Router>
   );
