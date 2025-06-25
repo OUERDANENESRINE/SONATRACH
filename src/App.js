@@ -18,11 +18,13 @@ import Signup from "./pages/Signup";
 import CreateAdmin from "./pages/CreateAdmin";
 import CreateStagiaire from "./pages/CreateStagiaire";
 import CreateEncadreur from "./pages/CreateEncadreur";
+import CreateStage from "./pages/CreateStage";
 
 
 function App() {
   return (
-    <Router>
+    <div className="page-container">
+        <Router>
       <ScrollDown />
       <Routes>
         <Route path="/" element={<Hero />} />
@@ -36,12 +38,15 @@ function App() {
         <Route path="/encadreur/stage/:id" element={<Stage />} /> 
         <Route path="/signup" element={<Signup />} />
         
+        <Route path="/Admin/CreateStage" element={<CreateStage />} />
         <Route path="/Admin/CreateAdmin" element={<CreateAdmin />} />
         <Route path="/Admin/CreateStagiaire" element={<CreateStagiaire />} />
         <Route path="/Admin/CreateEncadreur" element={<CreateEncadreur />} />
       </Routes>
-      <Footer />
+      
     </Router>
+    </div>
+    
     
   );
 }

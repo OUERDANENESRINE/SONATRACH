@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import logo from '../assets/logo.png' 
+import { UserCircle } from 'lucide-react'
 
 
 const navigation = [
@@ -21,14 +22,7 @@ export default function NavBar() {
       <header className="absolute inset-x-0 top-0 z-50">
         <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
-              <img
-                alt=""
-                src={logo}
-                className="NavLogo"
-              />
-            </a>
+            
           </div>
           <div className="flex lg:hidden">
             <button
@@ -52,14 +46,11 @@ export default function NavBar() {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a
-              href="/login"
-              className=" font-semibold text-gray-900 hover:text-orange-500 transition-colors duration-200 border-b-0"
-              style={{ borderBottom: 'none', textDecoration: 'none' }}
-            >
-              Deconnexion <span aria-hidden="true">&rarr;</span>
-            </a>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end pr-6">
+            <div className="flex flex-col items-center font-semibold text-gray-900">
+              <UserCircle className="size-10" />
+              <span className="text-xs mt-1">Lina</span>
+            </div>
           </div>
         </nav>
         

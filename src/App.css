@@ -1,56 +1,116 @@
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+/******logo de nav**********/
 .NavLogo{
   width: 60px;
   height: 80px;
- 
+
 }
+
+/********animation de la description de page hero**********/
 .desc{
   margin-top: 30px;
-   max-width: 672px; /* équivalent à max-w-2xl */
+   max-width: 672px; 
   text-align: center;
-  padding-top: 3rem;    /* py-4 = padding-top + padding-bottom: 1rem */
+  padding-top: 3rem;    
   padding-bottom: 3rem;
-  padding-left: 2.5rem; /* px-10 = padding-left + padding-right: 2.5rem */
+  padding-left: 2.5rem; 
   padding-right: 2.5rem;
-  background: rgba(255,255,255,0.1); /* bg-white/10 */
-  backdrop-filter: blur(8px);        /* backdrop-blur-md */
-  border-radius: 0.75rem;            /* rounded-xl */
+  background: rgba(255,255,255,0.1); 
+  backdrop-filter: blur(8px);       
+  border-radius: 0.75rem;            
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-xl */
-  color: #fff;                       /* text-white */
-  font-size: 1.5rem;                 /* text-2xl */
-  line-height: 1.625;                /* leading-relaxed */
+  color: #fff;                       
+  font-size: 1.5rem;                 
+  line-height: 1.625;                
   
 }
+/********animation de la description de page login**********/
 #login{
    margin-top: 30px;
-   max-width: 672px; /* équivalent à max-w-2xl */
+   max-width: 672px; 
   text-align: center;
-  padding-top: 3rem;    /* py-4 = padding-top + padding-bottom: 1rem */
+  padding-top: 3rem;    
   padding-bottom: 3rem;
-  padding-left: 2.5rem; /* px-10 = padding-left + padding-right: 2.5rem */
+  padding-left: 2.5rem; 
   padding-right: 2.5rem;
-  background: rgba(255,255,255,0.1); /* bg-white/10 */
-  backdrop-filter: blur(8px);        /* backdrop-blur-md */
-  border-radius: 0.75rem;            /* rounded-xl */
+  background: rgba(255,255,255,0.1); 
+  backdrop-filter: blur(8px);       
+  border-radius: 0.75rem;            
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-xl */
-  color: #fff;                       /* text-white */
-  font-size: 1.5rem;                 /* text-2xl */
-  line-height: 1.625;                /* leading-relaxed */
+  color: #fff;                       
+  font-size: 1.5rem;                 
+  line-height: 1.625;                
   
 }
+/********animation de la description de page register**********/
 #register{
    margin-top: 70px;
-   max-width: 672px; /* équivalent à max-w-2xl */
+   max-width: 672px; 
   text-align: center;
-  padding-top: 3rem;    /* py-4 = padding-top + padding-bottom: 1rem */
+  padding-top: 3rem;    
   padding-bottom: 3rem;
-  padding-left: 2.5rem; /* px-10 = padding-left + padding-right: 2.5rem */
+  padding-left: 2.5rem; 
   padding-right: 2.5rem;
-  background: rgba(255,255,255,0.1); /* bg-white/10 */
-  backdrop-filter: blur(8px);        /* backdrop-blur-md */
-  border-radius: 0.75rem;            /* rounded-xl */
+  background: rgba(255,255,255,0.1); 
+  backdrop-filter: blur(8px);       
+  border-radius: 0.75rem;            
   box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* shadow-xl */
-  color: #fff;                       /* text-white */
-  font-size: 1.5rem;                 /* text-2xl */
-  line-height: 1.625;                /* leading-relaxed */
+  color: #fff;                       
+  font-size: 1.5rem;                 
+  line-height: 1.625;                
   
+}
+/*********admin **********/
+/*****sidebar de l'admin**********/
+#admin-sidebar{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  z-index: 0;
+  padding-top: 120px; 
+}
+#admin-link{
+  display: inline;
+
+}
+#admin-dashboard-title{
+
+  padding-top: 130px;
+  padding-left: 40px;
+  
+}
+#formulaire{
+  padding-top: 130px;
+  padding-left: 420px;
+}
+
+#create-stagiaire-title{
+   padding-left: 140px;
+}
+#create-encadrant-title{
+    padding-right: 330px;
+}
+#formulaire-stage{
+  padding-top: 100px;
+  padding-left: 60px;
+
+}
+
+/* Footer styles */
+#footer {
+  
+  width: 100%;
+  height: 60px;
+  background-color: #333;
+  color: white;
+  text-align: center;
+  line-height: 60px; /* Center text vertically */
+  margin-top: auto;
+  z-index: 1;
 }
