@@ -15,11 +15,14 @@ import Stagiaire from "./pages/Stagiaire";
 import Encadreur from "./pages/Encadreur";
 import Stage from "./pages/Stage";
 import Signup from "./pages/Signup";
+
 import CreateAdmin from "./pages/CreateAdmin";
 import CreateStagiaire from "./pages/CreateStagiaire";
 import CreateEncadreur from "./pages/CreateEncadreur";
 import CreateStage from "./pages/CreateStage";
 
+
+import Dashboard from "./pages/Dashboard"; // ✅ Le nom doit être exactement comme dans le fichier
 
 function App() {
   return (
@@ -42,12 +45,12 @@ function App() {
         <Route path="/Admin/CreateAdmin" element={<CreateAdmin />} />
         <Route path="/Admin/CreateStagiaire" element={<CreateStagiaire />} />
         <Route path="/Admin/CreateEncadreur" element={<CreateEncadreur />} />
+         <Route path="/admin/dashboard" element={<Dashboard />} />
       </Routes>
       
-    </Router>
+   </Router>
+      
     </div>
-    
-    
   );
 }
 

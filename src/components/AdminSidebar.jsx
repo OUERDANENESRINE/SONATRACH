@@ -3,6 +3,7 @@ import {
   UserPlus, Users, LayoutDashboard, UserCog, ShieldCheck, LogOut,Plus} from "lucide-react";
 import logo from '../assets/logo.png' 
 
+
 const AdminSidebar = () => {
   const location = useLocation();
 
@@ -11,7 +12,9 @@ const AdminSidebar = () => {
     { to: "/admin/CreateStagiaire", label: "Ajouter un stagiaire", icon: <UserPlus size={18} /> },
     { to: "/admin/CreateEncadreur", label: "Ajouter un encadreur", icon: <UserPlus size={18} /> },
     { to: "/admin/CreateAdmin", label: "Ajouter un admin", icon: <UserPlus size={16} /> },
-    { to: "/admin/utilisateurs", label: "Tous les utilisateurs", icon: <Users size={18} /> },
+    { to: "/admin/dashboard", label: "Dashboard Utilisateurs", icon: <LayoutDashboard size={18} /> },
+    { to: "/admin", label: "Créer Un Stage", icon: <LayoutDashboard size={18} /> },
+    
   ];
 
   return (
@@ -49,7 +52,8 @@ const AdminSidebar = () => {
         </ul>
       </div>
 
-      {/* Déconnexion en bas */}
+      {/* Déconnexion */}
+      
       <div className="mt-10 pt-6 border-t border-gray-500">
         <Link
           to="/home"
