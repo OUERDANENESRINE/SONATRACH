@@ -1,168 +1,193 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import AdminSidebar from "../components/AdminSidebar";
+import SearchBar from "../components/SearchBar";
 import NavBar2 from "../components/NavBar2";
 
-function Admin() {
+const Dashboard = () => {
+  const [search, setSearch] = useState("");
+
+  const [admins, setAdmins] = useState([
+    { nom: "Admin", prenom: "Principal", email: "admin@sonatrach.dz" },
+    { nom: "Messaoudi", prenom: "Khaled", email: "k.messaoudi@sonatrach.dz" }
+  ]);
+
+  const [encadreurs, setEncadreurs] = useState([
+    { nom: "Hamissi", prenom: "Salah", email: "hamissi@sonatrach.dz" },
+    { nom: "Brahimi", prenom: "Yacine", email: "yacine@sonatrach.dz" }
+  ]);
+
+  const [stagiaires, setStagiaires] = useState([
+    { nom: "Ouerdane", prenom: "Nesrine", email: "nesrine@usthb.dz" },
+    { nom: "Benali", prenom: "Yasmine", email: "yasmine@usthb.dz" },
+    { nom: "Said", prenom: "Rania", email: "rania@esi.dz" }
+  ]);
+
   const [stages, setStages] = useState([
     {
-      id: 1,
-      theme: "Stage initial",
-      description: "Exemple",
+      theme: "Stage Dev React",
+      description: "Développement d’une application web",
       dateDebut: "2025-01-01",
       dateFin: "2025-06-01",
-      encadreur: {
-        nom: "Hamissi",
-        prenom: "Salah",
-        email: "hamissi@sonatrach.dz"
-      },
-      stagiaires: [
-        { nom: "Ouerdane", prenom: "Nesrine", email: "nesrine@usthb.dz" },
-        { nom: "Benali", prenom: "Yasmine", email: "yasmine@usthb.dz" }
-      ],
       etat: "en cours"
+    },
+    {
+      theme: "Stage Dev Java",
+      description: "Backend avec Spring Boot",
+      dateDebut: "2024-07-01",
+      dateFin: "2024-12-01",
+      etat: "terminé"
     }
   ]);
 
-  const [nouveauStage, setNouveauStage] = useState({
-    theme: "",
-    description: "",
-    dateDebut: "",
-    dateFin: "",
-    encadreur: { nom: "", prenom: "", email: "" },
-    stagiaires: [
-      { nom: "", prenom: "", email: "" },
-      { nom: "", prenom: "", email: "" }
-    ],
-    etat: "en cours"
-  });
+  const filteredAdmins = admins.filter((a) =>
+    `${a.nom} ${a.prenom}`.toLowerCase().includes(search.toLowerCase())
+  );
+  const filteredEncadreurs = encadreurs.filter((e) =>
+    `${e.nom} ${e.prenom}`.toLowerCase().includes(search.toLowerCase())
+  );
+  const filteredStagiaires = stagiaires.filter((s) =>
+    `${s.nom} ${s.prenom}`.toLowerCase().includes(search.toLowerCase())
+  );
+  const filteredStages = stages.filter((stage) =>
+    stage.theme.toLowerCase().includes(search.toLowerCase())
+  );
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-
-    if (name.startsWith("encadreur.")) {
-      const field = name.split(".")[1];
-      setNouveauStage((prev) => ({
-        ...prev,
-        encadreur: { ...prev.encadreur, [field]: value }
-      }));
-    } else if (name.startsWith("stagiaire.")) {
-      const [, index, field] = name.split(".");
-      const updatedStagiaires = [...nouveauStage.stagiaires];
-      updatedStagiaires[parseInt(index)][field] = value;
-      setNouveauStage((prev) => ({
-        ...prev,
-        stagiaires: updatedStagiaires
-      }));
-    } else {
-      setNouveauStage((prev) => ({ ...prev, [name]: value }));
-    }
+  const handleDelete = (index, listSetter, currentList) => {
+    const updated = [...currentList];
+    updated.splice(index, 1);
+    listSetter(updated);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newStage = { ...nouveauStage, id: Date.now() };
-    setStages([newStage, ...stages]);
-    setNouveauStage({
-      theme: "",
-      description: "",
-      dateDebut: "",
-      dateFin: "",
-      encadreur: { nom: "", prenom: "", email: "" },
-      stagiaires: [
-        { nom: "", prenom: "", email: "" },
-        { nom: "", prenom: "", email: "" }
-      ],
-      etat: "en cours"
-    });
-  };
-
-  const supprimerStage = (id) => {
-    if (window.confirm("Supprimer ce stage ?")) {
-      setStages(stages.filter((s) => s.id !== id));
-    }
-  };
-
-  const modifierStage = (id) => {
-    alert(`Modifier stage ID ${id} - fonction à venir`);
-  };
+  const renderActions = (index, deleteHandler) => (
+    <div className="flex space-x-2">
+      <button className="bg-blue-200 text-white px-2 py-1 rounded hover:bg-yellow-300 text-sm">
+        Modifier
+      </button>
+      <button
+        className="bg-red-300 text-white px-2 py-1 rounded hover:bg-red-400 text-sm"
+        onClick={deleteHandler}
+      >
+        Supprimer
+      </button>
+    </div>
+  );
 
   return (
-    
-    <div className="flex">
+    <div className="p-8" id="DashBoard-users">
       <NavBar2 />
       <AdminSidebar />
-      <div className="ml-64  w-full flex-center p-8">
-        <h2 className=" text-2xl font-bold mb-6  text-orange-700" id="admin-dashboard-title">
-          Tableau de bord Administrateur des stages
-        </h2>
+      <div className="ml-64 mt-10 flex justify-center">
+        <motion.div
+          className="px-8 py-10 w-full max-w-[1400px]"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="bg-gray-200 rounded-xl shadow-lg p-10 text-gray-800">
+            <h2 className="text-2xl font-bold text-center text-gray mb-6">
+              Dashboard Utilisateurs
+            </h2>
+            <div className="flex justify-center mb-6">
+              <SearchBar value={search} onChange={setSearch} />
+            </div>
 
-        {/* FORMULAIRE */}
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow mb-8 space-y-4">
-          <h3 className="text-xl font-semibold text-gray-700 mb-2">Créer un nouveau stage</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+              {/* Admins */}
+              <div className="bg-white bg-opacity-20 rounded-lg shadow p-6 md:col-span-2">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-orange-300">Administrateurs</h3>
+                  <button
+                    className="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600 text-sm"
+                    onClick={() => window.location.href = "/admin/CreateAdmin"}
+                  >
+                    + Ajouter
+                  </button>
+                </div>
+                <ul className="space-y-2">
+                  {filteredAdmins.map((a, idx) => (
+                    <li key={idx} className="border border-gray p-3 rounded hover:bg-orange-100 hover:bg-opacity-200">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <strong>{a.nom} {a.prenom}</strong><br />
+                          <span className="text-sm text-gray-400">{a.email}</span>
+                        </div>
+                        {renderActions(idx, () => handleDelete(idx, setAdmins, admins))}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <input name="theme" value={nouveauStage.theme} onChange={handleInputChange} placeholder="Thème" className="w-full border p-2 rounded" required />
-          <textarea name="description" value={nouveauStage.description} onChange={handleInputChange} placeholder="Description" className="w-full border p-2 rounded" required />
+              {/* Encadreurs */}
+              <div className="bg-white bg-opacity-20 rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-orange-300">Encadreurs</h3>
+                  <button className="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600 text-sm" onClick={() => window.location.href = "/admin/CreateEncadreur"}>+ Ajouter</button>
+                </div>
+                <ul className="space-y-2">
+                  {filteredEncadreurs.map((e, idx) => (
+                    <li key={idx} className="border border-gray p-3 rounded hover:bg-orange-100 hover:bg-opacity-200">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <strong>{e.nom} {e.prenom}</strong><br />
+                          <span className="text-sm text-gray-400">{e.email}</span>
+                        </div>
+                        {renderActions(idx, () => handleDelete(idx, setEncadreurs, encadreurs))}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <div className="flex gap-4">
-            <input type="date" name="dateDebut" value={nouveauStage.dateDebut} onChange={handleInputChange} className="border p-2 rounded w-full" required />
-            <input type="date" name="dateFin" value={nouveauStage.dateFin} onChange={handleInputChange} className="border p-2 rounded w-full" required />
-          </div>
+              {/* Stagiaires */}
+              <div className="bg-white bg-opacity-20 rounded-lg shadow p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-orange-300">Stagiaires</h3>
+                  <button className="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600 text-sm" onClick={() => window.location.href = "/admin/CreateStagiaire"}>+ Ajouter</button>
+                </div>
+                <ul className="space-y-2">
+                  {filteredStagiaires.map((s, idx) => (
+                    <li key={idx} className="border border-gray p-3 rounded hover:bg-orange-100 hover:bg-opacity-200">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <strong>{s.nom} {s.prenom}</strong><br />
+                          <span className="text-sm text-gray-400">{s.email}</span>
+                        </div>
+                        {renderActions(idx, () => handleDelete(idx, setStagiaires, stagiaires))}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <h4 className="font-semibold mt-4">Encadreur</h4>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <input name="encadreur.nom" value={nouveauStage.encadreur.nom} onChange={handleInputChange} placeholder="Nom" className="border p-2 rounded" required />
-            <input name="encadreur.prenom" value={nouveauStage.encadreur.prenom} onChange={handleInputChange} placeholder="Prénom" className="border p-2 rounded" required />
-            <input type="email" name="encadreur.email" value={nouveauStage.encadreur.email} onChange={handleInputChange} placeholder="Email" className="border p-2 rounded" required />
-          </div>
-
-          {[0, 1].map((i) => (
-            <div key={i}>
-              <h4 className="font-semibold mt-6">Stagiaire {i + 1}</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <input name={`stagiaire.${i}.nom`} value={nouveauStage.stagiaires[i].nom} onChange={handleInputChange} placeholder="Nom" className="border p-2 rounded" />
-                <input name={`stagiaire.${i}.prenom`} value={nouveauStage.stagiaires[i].prenom} onChange={handleInputChange} placeholder="Prénom" className="border p-2 rounded" />
-                <input type="email" name={`stagiaire.${i}.email`} value={nouveauStage.stagiaires[i].email} onChange={handleInputChange} placeholder="Email" className="border p-2 rounded" />
+              {/* Stages */}
+              <div className="bg-white bg-opacity-20 rounded-lg shadow p-6 md:col-span-2">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-orange-300">Stages</h3>
+                  <button className="bg-orange-500 text-white px-3 py-1 rounded hover:bg-orange-600 text-sm" onClick={() => window.location.href = "/admin/CreateStage"}>+ Ajouter</button>
+                </div>
+                <ul className="space-y-3">
+                  {filteredStages.map((stage, idx) => (
+                    <li key={idx} className="border border-gray p-3 rounded hover:bg-orange-100 hover:bg-opacity-200">
+                      <div className="flex justify-between items-center">
+                        <div>
+                          <strong>{stage.theme}</strong> — {stage.dateDebut} ➝ {stage.dateFin}<br />
+                          <span className="text-sm">{stage.description}</span><br />
+                          <span className="text-sm text-orange-400 font-semibold">État : {stage.etat}</span>
+                        </div>
+                        {renderActions(idx, () => handleDelete(idx, setStages, stages))}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-          ))}
-
-          <button type="submit" className="bg-orange-600 text-white px-4 py-2 rounded hover:bg-orange-700 transition">
-            Ajouter le stage
-          </button>
-        </form>
-
-        {/* AFFICHAGE DES STAGES */}
-        {stages.map((stage) => (
-          <div key={stage.id} className="bg-white shadow rounded p-6 mb-6">
-            <div className="flex justify-between items-center mb-2">
-              <h4 className="text-xl font-semibold text-orange-600">{stage.theme}</h4>
-              <div className="space-x-2">
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1 rounded" onClick={() => modifierStage(stage.id)}>
-                  ✏️ Modifier
-                </button>
-                <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded" onClick={() => supprimerStage(stage.id)}>
-                  🗑️ Supprimer
-                </button>
-              </div>
-            </div>
-            <p><strong>Description :</strong> {stage.description}</p>
-            <p><strong>Durée :</strong> {stage.dateDebut} ➝ {stage.dateFin}</p>
-            <p><strong>État :</strong> {stage.etat}</p>
-
-            <h6 className="mt-4 font-semibold">Encadreur</h6>
-            <p>{stage.encadreur.nom} {stage.encadreur.prenom} — {stage.encadreur.email}</p>
-
-            <h6 className="mt-4 font-semibold">Stagiaires</h6>
-            <ul className="list-disc list-inside">
-              {stage.stagiaires.map((stagiaire, idx) => (
-                <li key={idx}>{stagiaire.nom} {stagiaire.prenom} — {stagiaire.email}</li>
-              ))}
-            </ul>
           </div>
-        ))}
+        </motion.div>
       </div>
     </div>
   );
-}
+};
 
-export default Admin;
+export default Dashboard;
