@@ -8,12 +8,13 @@ const AdminSidebar = () => {
   const location = useLocation();
 
   const navItems = [
-    { to: "/admin/CreateStage", label: "Ajouter Un Stage ", icon: <Plus size={18} /> },
+    
     { to: "/admin/CreateStagiaire", label: "Ajouter un stagiaire", icon: <UserPlus size={18} /> },
     { to: "/admin/CreateEncadreur", label: "Ajouter un encadreur", icon: <UserPlus size={18} /> },
     { to: "/admin/CreateAdmin", label: "Ajouter un admin", icon: <UserPlus size={16} /> },
+    { to: "/admin/CreateStage", label: "Ajouter Un Stage ", icon: <Plus size={18} /> },
     { to: "/admin/dashboard", label: "Dashboard Utilisateurs", icon: <LayoutDashboard size={18} /> },
-    { to: "/admin", label: "Créer Un Stage", icon: <LayoutDashboard size={18} /> },
+    { to: "/admin", label: "DashBoard Stages", icon: <LayoutDashboard size={18} /> },
     
   ];
 
