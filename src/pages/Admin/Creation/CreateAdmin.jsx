@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import NavBar2 from "../components/NavBar2";
-import AdminSidebar from "../components/AdminSidebar";
+import NavBar2 from "../../../components/NavBar2";
+import AdminSidebar from "../../../components/AdminSidebar";
 
-const CreateStagiaire = () => {
+const CreateAdmin = () => {
   const [form, setForm] = useState({
     nom: "",
     prenom: "",
     email: "",
-    etablissement: "",
-    specialite: "",
+    service: "",
   });
 
   const handleChange = (e) => {
@@ -18,14 +17,14 @@ const CreateStagiaire = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Stagiaire à enregistrer :", form);
-    // 👉 Ici tu peux envoyer vers ton backend avec Axios
+    console.log("Encadrant à enregistrer :", form);
+    // 👉 Tu peux ici envoyer le form vers ton backend
   };
 
   return (
     <div className="p-8 " id="formulaire-stage">
-      <NavBar2/>
-    <AdminSidebar/>
+      <NavBar2 />
+      <AdminSidebar />
         <motion.div
       className="max-w-xl mx-auto mt-10 p-6 bg-gray-200 rounded-lg shadow-md"
       initial={{ opacity: 0, y: 40 }}
@@ -33,7 +32,7 @@ const CreateStagiaire = () => {
       transition={{ duration: 0.6 }}
     >
       <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
-        Ajouter un Stagiaire
+        Ajouter un Administrateur
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -73,23 +72,11 @@ const CreateStagiaire = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">Établissement</label>
+          <label className="block text-sm font-medium text-gray-700">Mot de passe</label>
           <input
             type="text"
-            name="etablissement"
-            value={form.etablissement}
-            onChange={handleChange}
-            required
-            className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-orange-400"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Spécialité</label>
-          <input
-            type="text"
-            name="specialite"
-            value={form.specialite}
+            name="service"
+            value={form.service}
             onChange={handleChange}
             required
             className="w-full mt-1 p-2 border rounded-md focus:ring-2 focus:ring-orange-400"
@@ -109,4 +96,4 @@ const CreateStagiaire = () => {
   );
 };
 
-export default CreateStagiaire;
+export default CreateAdmin;

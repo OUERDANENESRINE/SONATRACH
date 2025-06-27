@@ -10,16 +10,21 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Admin from "./pages/Admin";
+import Admin from "./pages/Admin/Admin";
 import Stagiaire from "./pages/Stagiaire";
 import Encadreur from "./pages/Encadreur";
 import Stage from "./pages/Stage";
 import Signup from "./pages/Signup";
 
-import CreateAdmin from "./pages/CreateAdmin";
-import CreateStagiaire from "./pages/CreateStagiaire";
-import CreateEncadreur from "./pages/CreateEncadreur";
-import CreateStage from "./pages/CreateStage";
+import CreateAdmin from "./pages/Admin/Creation/CreateAdmin";
+import CreateStagiaire from "./pages/Admin/Creation/CreateStagiaire";
+import CreateEncadreur from "./pages/Admin/Creation/CreateEncadreur";
+import CreateStage from "./pages/Admin/Creation/CreateStage";
+
+import ModifierAdmin from "./pages/Admin/Modification/ModifierAdmin";
+import ModifierStagiaire from "./pages/Admin/Modification/ModifierStagiaire";
+import ModifierEncadreur from "./pages/Admin/Modification/ModifierEncadreur";
+import ModifierStage from "./pages/Admin/Modification/ModifierStage";
 
 
 import Dashboard from "./pages/Dashboard"; // ✅ Le nom doit être exactement comme dans le fichier
@@ -46,6 +51,11 @@ function App() {
         <Route path="/Admin/CreateStagiaire" element={<CreateStagiaire />} />
         <Route path="/Admin/CreateEncadreur" element={<CreateEncadreur />} />
          <Route path="/admin/dashboard" element={<Dashboard />} />
+
+        <Route path="/Admin/ModifierAdmin" element={<ModifierAdmin />} />
+        <Route path="/Admin/ModifierStagiaire" element={<ModifierStagiaire />} />
+        <Route path="/Admin/ModifierEncadreur" element={<ModifierEncadreur />} />
+        <Route path="/Admin/ModifierStage" element={<ModifierStage />} />
       </Routes>
       
    </Router>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import NavBar2 from "../components/NavBar2";
-import AdminSidebar from "../components/AdminSidebar";
+import NavBar2 from "../../../components/NavBar2";
+import AdminSidebar from "../../../components/AdminSidebar";
 
 const CreateEncadrant = () => {
   const [form, setForm] = useState({

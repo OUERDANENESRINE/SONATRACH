@@ -1,5 +1,5 @@
-import NavBar2 from "../components/NavBar2";
-import AdminSidebar from "../components/AdminSidebar";
+import NavBar2 from "../../../components/NavBar2";
+import AdminSidebar from "../../../components/AdminSidebar";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";

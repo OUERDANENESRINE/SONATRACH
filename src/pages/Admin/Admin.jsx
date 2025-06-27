@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import AdminSidebar from "../components/AdminSidebar";
-import SearchBar from "../components/SearchBar";
-import NavBar2 from "../components/NavBar2";
+import AdminSidebar from "../../components/AdminSidebar";
+import SearchBar from "../../components/SearchBar";
+import NavBar2 from "../../components/NavBar2";
 
 const Dashboard = () => {
   const [search, setSearch] = useState("");
