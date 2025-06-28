@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import AdminSidebar from "../../components/AdminSidebar";
-import SearchBar from "../../components/SearchBar";
 import NavBar2 from "../../components/NavBar2";
 import { UserSearch } from "lucide-react";
 
 const DashboardAdmin = () => {
   const [search, setSearch] = useState("");
+  const [admins, setAdmins] = useState([]);
 
-    const [admins, setAdmins] = useState([
-    { nom: "Admin", prenom: "Principal", email: "admin@sonatrach.dz" },
-    { nom: "Messaoudi", prenom: "Khaled", email: "k.messaoudi@sonatrach.dz" }
-  ]);
+  // 🔄 Charger les administrateurs depuis l’API
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/admins")
+      .then((res) => setAdmins(res.data))
+      .catch((err) => console.error("Erreur lors de la récupération des admins :", err));
+  }, []);
 
   const filteredAdmins = admins.filter((s) =>
     `${s.nom} ${s.prenom}`.toLowerCase().includes(search.toLowerCase())
@@ -24,7 +27,7 @@ const DashboardAdmin = () => {
   };
 
   return (
-    <div className="p-8" >
+    <div className="p-8">
       <NavBar2 />
       <AdminSidebar />
       <div className="ml-64 mt-10 flex justify-center">
@@ -36,24 +39,24 @@ const DashboardAdmin = () => {
         >
           <div className="bg-gray-200 rounded-xl shadow-lg p-10 text-gray-800">
             <h2 className="text-2xl font-bold text-center mb-6">
-              Dashboard Admininstrateurs
+              Dashboard Administrateurs
             </h2>
-           
-           <div className="flex justify-center mb-6">
-             <div className="relative w-full max-w-md">
-               <input
-                 type="text"
-                 placeholder="Rechercher un admin..."
-                 value={search}
-                 onChange={(e) => setSearch(e.target.value)}
-                 className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-400 focus:outline-none"
-               />
-               <UserSearch
-                 size={20}
-                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-               />
-             </div>
-           </div>
+
+            <div className="flex justify-center mb-6">
+              <div className="relative w-full max-w-md">
+                <input
+                  type="text"
+                  placeholder="Rechercher un admin..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                />
+                <UserSearch
+                  size={20}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                />
+              </div>
+            </div>
 
             <div className="overflow-x-auto">
               <motion.table
@@ -62,7 +65,7 @@ const DashboardAdmin = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
               >
-                <thead className=" bg-gray-500 text-white text-left">
+                <thead className="bg-gray-500 text-white text-left">
                   <tr>
                     <th className="p-3">Nom</th>
                     <th className="p-3">Prénom</th>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { UserSearch } from "lucide-react";
 import AdminSidebar from "../../components/AdminSidebar";
@@ -6,25 +6,14 @@ import NavBar2 from "../../components/NavBar2";
 
 const DashboardStages = () => {
   const [search, setSearch] = useState("");
+  const [stages, setStages] = useState([]);
 
-  const [stages, setStages] = useState([
-    {
-      theme: "Application Web",
-      dateDebut: "2024-07-01",
-      dateFin: "2024-09-01",
-      encadrant: "M. Bensalah",
-      stagiaire1: "Yasmine Benali",
-      stagiaire2: "Nesrine Ouerdane",
-    },
-    {
-      theme: "Analyse de données",
-      dateDebut: "2024-06-15",
-      dateFin: "2024-08-15",
-      encadrant: "Mme. Larbi",
-      stagiaire1: "Rania Said",
-      stagiaire2: "Sara Khelifi",
-    },
-  ]);
+  useEffect(() => {
+    fetch("http://localhost:5000/api/stages")
+      .then((res) => res.json())
+      .then((data) => setStages(data))
+      .catch((err) => console.error("Erreur lors du fetch des stages:", err));
+  }, []);
 
   const getDuree = (start, end) => {
     const debut = new Date(start);
@@ -34,20 +23,20 @@ const DashboardStages = () => {
     return `${jours} jours`;
   };
 
-  const handleDelete = (index) => {
-    const updated = [...stages];
-    updated.splice(index, 1);
+  const handleDelete = (id) => {
+    const updated = stages.filter((s) => s.id !== id);
     setStages(updated);
+    // Optionnel : ajouter une suppression côté backend ici
   };
 
   const filteredStages = stages.filter((s) =>
-    `${s.theme} ${s.encadrant} ${s.stagiaire1} ${s.stagiaire2}`
+    `${s.theme} ${s.encadrant_nom} ${s.encadrant_prenom} ${s.stagiaire1_nom} ${s.stagiaire1_prenom} ${s.stagiaire2_nom ?? ""} ${s.stagiaire2_prenom ?? ""}`
       .toLowerCase()
       .includes(search.toLowerCase())
   );
 
   return (
-    <div className="p-8" >
+    <div className="p-8">
       <NavBar2 />
       <AdminSidebar />
       <div className="ml-64 mt-10 flex justify-center">
@@ -78,7 +67,6 @@ const DashboardStages = () => {
               </div>
             </div>
 
-            {/*  Tableau des stages */}
             <div className="overflow-x-auto">
               <motion.table
                 className="min-w-full text-sm border-collapse rounded-lg overflow-hidden"
@@ -101,19 +89,25 @@ const DashboardStages = () => {
                 <tbody>
                   {filteredStages.map((s, idx) => (
                     <motion.tr
-                      key={idx}
+                      key={s.id}
                       className="border-b hover:bg-orange-50 transition duration-200"
                       whileHover={{ scale: 1.01 }}
                     >
                       <td className="p-3">{s.theme}</td>
-                      <td className="p-3">{s.dateDebut}</td>
-                      <td className="p-3">{s.dateFin}</td>
+                      <td className="p-3">{s.date_debut?.split("T")[0]}</td>
+                      <td className="p-3">{s.date_fin?.split("T")[0]}</td>
                       <td className="p-3">
-                        {getDuree(s.dateDebut, s.dateFin)}
+                        {getDuree(s.date_debut, s.date_fin)}
                       </td>
-                      <td className="p-3">{s.encadrant}</td>
-                      <td className="p-3">{s.stagiaire1}</td>
-                      <td className="p-3">{s.stagiaire2}</td>
+                      <td className="p-3">
+                        {s.encadrant_prenom} {s.encadrant_nom}
+                      </td>
+                      <td className="p-3">
+                        {s.stagiaire1_prenom} {s.stagiaire1_nom}
+                      </td>
+                      <td className="p-3">
+                        {s.stagiaire2_prenom || "-"} {s.stagiaire2_nom || ""}
+                      </td>
                       <td className="p-3 flex flex-col items-center gap-2">
                         <button
                           className="bg-gray-400 hover:bg-orange-300 text-white px-4 py-1 rounded text-xs w-24"
@@ -123,7 +117,7 @@ const DashboardStages = () => {
                         </button>
                         <button
                           className="bg-red-300 hover:bg-red-600 text-white px-4 py-1 rounded text-xs w-24"
-                          onClick={() => handleDelete(idx)}
+                          onClick={() => handleDelete(s.id)}
                         >
                           Supprimer
                         </button>

@@ -1,30 +1,36 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import AdminSidebar from "../../components/AdminSidebar";
-import SearchBar from "../../components/SearchBar";
 import NavBar2 from "../../components/NavBar2";
 import { UserSearch } from "lucide-react";
 
 const DashboardEncadreur = () => {
   const [search, setSearch] = useState("");
+  const [encadreurs, setEncadreurs] = useState([]);
 
-    const [admins, setAdmins] = useState([
-    { nom: "Admin", prenom: "Principal", email: "admin@sonatrach.dz",service:"informatique" },
-    { nom: "Messaoudi", prenom: "Khaled", email: "k.messaoudi@sonatrach.dz",service:"marketing" }
-  ]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/encadreurs")
+      .then((res) => {
+        setEncadreurs(res.data);
+      })
+      .catch((err) => {
+        console.error("Erreur lors de la récupération des encadreurs :", err);
+      });
+  }, []);
 
-  const filteredAdmins = admins.filter((s) =>
+  const filteredEncadreurs = encadreurs.filter((s) =>
     `${s.nom} ${s.prenom}`.toLowerCase().includes(search.toLowerCase())
   );
 
   const handleDelete = (index) => {
-    const updated = [...admins];
+    const updated = [...encadreurs];
     updated.splice(index, 1);
-    setAdmins(updated);
+    setEncadreurs(updated);
   };
 
   return (
-    <div className="p-8" >
+    <div className="p-8">
       <NavBar2 />
       <AdminSidebar />
       <div className="ml-64 mt-10 flex justify-center">
@@ -38,22 +44,22 @@ const DashboardEncadreur = () => {
             <h2 className="text-2xl font-bold text-center mb-6">
               Dashboard Encadreurs
             </h2>
-           
-           <div className="flex justify-center mb-6">
-             <div className="relative w-full max-w-md">
-               <input
-                 type="text"
-                 placeholder="Rechercher un admin..."
-                 value={search}
-                 onChange={(e) => setSearch(e.target.value)}
-                 className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-400 focus:outline-none"
-               />
-               <UserSearch
-                 size={20}
-                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-               />
-             </div>
-           </div>
+
+            <div className="flex justify-center mb-6">
+              <div className="relative w-full max-w-md">
+                <input
+                  type="text"
+                  placeholder="Rechercher un encadreur..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                />
+                <UserSearch
+                  size={20}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                />
+              </div>
+            </div>
 
             <div className="overflow-x-auto">
               <motion.table
@@ -62,17 +68,17 @@ const DashboardEncadreur = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
               >
-                <thead className=" bg-gray-500 text-white text-left">
+                <thead className="bg-gray-500 text-white text-left">
                   <tr>
                     <th className="p-3">Nom</th>
                     <th className="p-3">Prénom</th>
                     <th className="p-3">Email</th>
-                    <th className="p-3">Service</th>
+                    <th className="p-3">Département</th>
                     <th className="p-3 text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredAdmins.map((s, idx) => (
+                  {filteredEncadreurs.map((s, idx) => (
                     <motion.tr
                       key={idx}
                       className="border-b hover:bg-orange-50 transition duration-200"
@@ -81,11 +87,11 @@ const DashboardEncadreur = () => {
                       <td className="p-3">{s.nom}</td>
                       <td className="p-3">{s.prenom}</td>
                       <td className="p-3">{s.email}</td>
-                      <td className="p-3">{s.service}</td>
+                      <td className="p-3">{s.departement}</td>
                       <td className="p-3 flex flex-col items-center gap-2">
                         <button
                           className="bg-gray-400 hover:bg-orange-300 text-gray-900 px-4 py-1 rounded text-xs w-24"
-                          onClick={() => alert("Modifier admin")}
+                          onClick={() => alert("Modifier encadreur")}
                         >
                           Modifier
                         </button>

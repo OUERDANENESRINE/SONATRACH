@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import AdminSidebar from "../../components/AdminSidebar";
 import SearchBar from "../../components/SearchBar";
@@ -7,30 +7,17 @@ import { UserSearch } from "lucide-react";
 
 const DashboardStagiaire = () => {
   const [search, setSearch] = useState("");
+  const [stagiaires, setStagiaires] = useState([]);
 
-  const [stagiaires, setStagiaires] = useState([
-    {
-      nom: "Ouerdane",
-      prenom: "Nesrine",
-      email: "nesrine@usthb.dz",
-      etablissement: "USTHB",
-      specialite: "Informatique",
-    },
-    {
-      nom: "Benali",
-      prenom: "Yasmine",
-      email: "yasmine@usthb.dz",
-      etablissement: "USTHB",
-      specialite: "Réseaux",
-    },
-    {
-      nom: "Said",
-      prenom: "Rania",
-      email: "rania@esi.dz",
-      etablissement: "ESI",
-      specialite: "Développement Web",
-    },
-  ]);
+  // Charger les stagiaires depuis le backend
+  useEffect(() => {
+    fetch("http://localhost:5000/api/stagiaires")
+      .then((res) => res.json())
+      .then((data) => setStagiaires(data))
+      .catch((err) =>
+        console.error("Erreur lors du chargement des stagiaires :", err)
+      );
+  }, []);
 
   const filteredStagiaires = stagiaires.filter((s) =>
     `${s.nom} ${s.prenom}`.toLowerCase().includes(search.toLowerCase())
@@ -43,7 +30,7 @@ const DashboardStagiaire = () => {
   };
 
   return (
-    <div className="p-8" >
+    <div className="p-8">
       <NavBar2 />
       <AdminSidebar />
       <div className="ml-64 mt-10 flex justify-center">
@@ -57,23 +44,25 @@ const DashboardStagiaire = () => {
             <h2 className="text-2xl font-bold text-center mb-6">
               Dashboard Stagiaires
             </h2>
-           
-           <div className="flex justify-center mb-6">
-             <div className="relative w-full max-w-md">
-               <input
-                 type="text"
-                 placeholder="Rechercher un stagiaire..."
-                 value={search}
-                 onChange={(e) => setSearch(e.target.value)}
-                 className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-400 focus:outline-none"
-               />
-               <UserSearch
-                 size={20}
-                 className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
-               />
-             </div>
-           </div>
 
+            {/* Barre de recherche */}
+            <div className="flex justify-center mb-6">
+              <div className="relative w-full max-w-md">
+                <input
+                  type="text"
+                  placeholder="Rechercher un stagiaire..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="w-full pr-10 pl-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-orange-400 focus:outline-none"
+                />
+                <UserSearch
+                  size={20}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                />
+              </div>
+            </div>
+
+            {/* Tableau des stagiaires */}
             <div className="overflow-x-auto">
               <motion.table
                 className="min-w-full text-sm border-collapse rounded-lg overflow-hidden"
@@ -81,13 +70,14 @@ const DashboardStagiaire = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.2, duration: 0.4 }}
               >
-                <thead className=" bg-gray-500 text-white text-left">
+                <thead className="bg-gray-500 text-white text-left">
                   <tr>
                     <th className="p-3">Nom</th>
                     <th className="p-3">Prénom</th>
                     <th className="p-3">Email</th>
-                    <th className="p-3">Établissement</th>
-                    <th className="p-3">Spécialité</th>
+                    <th className="p-3">Université</th>
+                    <th className="p-3">Filière</th>
+                    <th className="p-3">Niveau</th>
                     <th className="p-3 text-center">Actions</th>
                   </tr>
                 </thead>
@@ -101,8 +91,9 @@ const DashboardStagiaire = () => {
                       <td className="p-3">{s.nom}</td>
                       <td className="p-3">{s.prenom}</td>
                       <td className="p-3">{s.email}</td>
-                      <td className="p-3">{s.etablissement}</td>
-                      <td className="p-3">{s.specialite}</td>
+                      <td className="p-3">{s.universite}</td>
+                      <td className="p-3">{s.filiere}</td>
+                      <td className="p-3">{s.niveau}</td>
                       <td className="p-3 flex flex-col items-center gap-2">
                         <button
                           className="bg-gray-400 hover:bg-orange-300 text-gray-900 px-4 py-1 rounded text-xs w-24"
