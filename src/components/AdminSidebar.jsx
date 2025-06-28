@@ -20,6 +20,9 @@ const AdminSidebar = () => {
   const location = useLocation();
   const [showAddMenu, setShowAddMenu] = useState(false);
   const [showEditMenu, setShowEditMenu] = useState(false);
+  const [showDashboardMenu, setShowDashboardMenu] = useState(false);
+
+  
 
   return (
     <div className="w-60 h-screen bg-gradient-to-b from-gray-500 to-orange-300  p-6 fixed top-0 left-0 shadow-lg flex flex-col justify-between">
@@ -36,22 +39,70 @@ const AdminSidebar = () => {
       {/* Menu */}
       <div >
         <ul className="space-y-2  " id="admin-sidebar">
-          {/* Dashboard */}
-          <li>
-            <Link
-              to="/admin/dashboard"
-              className={`flex items-center justify-between px-4 py-2 rounded-lg text-gray-800 no-underline transition-all hover:bg-white/30 ${
-                location.pathname === "/admin/dashboard"
-                  ? "font-semibold text-orange-900"
-                  : ""
-              }`}
-            >
-              <div className="flex items-center gap-3">
-                <LayoutDashboard size={18} />
-                <span>Dashboard </span>
-              </div>
-            </Link>
-          </li>
+          
+          {/* Dashboard (avec sous-menu) */}
+          <li
+  className="relative"
+  onMouseEnter={() => setShowDashboardMenu(true)}
+  onMouseLeave={() => setShowDashboardMenu(false)}
+>
+  <button className="w-full flex items-center justify-between px-4 py-2 rounded-lg hover:bg-white/30 transition-all">
+    <div className="flex items-center gap-3">
+      <LayoutDashboard size={16} />
+      <span>Dashboard</span>
+    </div>
+    {showDashboardMenu ? (
+      <ChevronDown size={16} className="transition-transform rotate-180" />
+    ) : (
+      <ChevronRight size={16} className=" transition-transform" />
+    )}
+  </button>
+
+  {showDashboardMenu && (
+    <ul className="p-2 absolute left-full top-0 ml-2 w-60 bg-gradient-to-b from-gray-500 to-orange-300 rounded-lg shadow-lg z-50">
+      <li>
+        <Link
+          to="/admin/dashboardStagiaire"
+          className="flex items-center gap-3 px-4 py-2 text-gray-800 hover:bg-white/30 rounded-md no-underline"
+        >
+          <User size={18} />
+          <span>Stagiaires</span>
+        </Link>
+      </li>
+      <hr className="my-1 border-gray-800" />
+      <li>
+        <Link
+          to="/admin/dashboardEncadreur"
+          className="flex items-center gap-3 px-4 py-2 text-gray-800 hover:bg-white/30 rounded-md no-underline"
+        >
+          <ShieldCheck size={18} />
+          <span>Encadrants</span>
+        </Link>
+      </li>
+      <hr className="my-1 border-gray-800" />
+      <li>
+        <Link
+          to="/admin/dashboardAdmin"
+          className="flex items-center gap-3 px-4 py-2 text-gray-800 hover:bg-white/30 rounded-md no-underline"
+        >
+          <ShieldCheck size={18} />
+          <span>Admins</span>
+        </Link>
+      </li>
+      <hr className="my-1 border-gray-800" />
+      <li>
+        <Link
+          to="/admin/dashboardStage"
+          className="flex items-center gap-3 px-4 py-2 text-gray-800 hover:bg-white/30 rounded-md no-underline"
+        >
+          <Briefcase size={18} />
+          <span>Stages</span>
+        </Link>
+      </li>
+    </ul>
+  )}
+</li>
+
 
           {/* Ajouter */}
           <li

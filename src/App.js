@@ -26,6 +26,11 @@ import ModifierStagiaire from "./pages/Admin/Modification/ModifierStagiaire";
 import ModifierEncadreur from "./pages/Admin/Modification/ModifierEncadreur";
 import ModifierStage from "./pages/Admin/Modification/ModifierStage";
 
+import DashboardAdmin from "./pages/Admin/DashboardAdmin";
+import DashboardStagiaire from "./pages/Admin/DashboardStagiaire";
+import DashboardStage from "./pages/Admin/DashboardStage";
+import DashboardEncadreur from "./pages/Admin/DashboardEncadreur";
+
 
 import Dashboard from "./pages/Dashboard"; // ✅ Le nom doit être exactement comme dans le fichier
 
@@ -56,6 +61,12 @@ function App() {
         <Route path="/Admin/ModifierStagiaire" element={<ModifierStagiaire />} />
         <Route path="/Admin/ModifierEncadreur" element={<ModifierEncadreur />} />
         <Route path="/Admin/ModifierStage" element={<ModifierStage />} />
+
+        <Route path="/admin/dashboardAdmin" element={<DashboardAdmin />} />
+        <Route path="/admin/dashboardStage" element={<DashboardStage />} />
+        <Route path="/admin/dashboardStagiaire" element={<DashboardStagiaire />} />
+        <Route path="/admin/dashboardEncadreur" element={<DashboardEncadreur />} />
+        
       </Routes>
       
    </Router>
